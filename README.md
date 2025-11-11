@@ -1,6 +1,6 @@
 # This project is for school purposes
 
-# Library-Management-Information-System
+# Library Management System
 A computerized system for Libraries to manage books, manage students, calculate fines, produce reports and manage daily book transaction.
 
 
