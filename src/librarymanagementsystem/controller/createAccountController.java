@@ -31,7 +31,13 @@ import librarymanagementsystem.model.DatabaseConnection;
 import librarymanagementsystem.model.LoadStage;
 import librarymanagementsystem.model.Notification;
 
+/**
+ * FXML Controller class
+ *
+ * @author Bright
+ */
 public class createAccountController implements Initializable {
+
     @FXML
     private Label close;
     @FXML
@@ -96,33 +102,41 @@ public class createAccountController implements Initializable {
         return true;
     }
 
-    private boolean checkIfUsernameExists() {
+    private boolean checkIfAccountAlreadyExist() {
         Connection conn = null;
         PreparedStatement pre = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM User WHERE Username = ?";
+        String query2 = "SELECT * FROM User";
         try {
             conn = DatabaseConnection.Connect();
-            pre = conn.prepareStatement(query);
-            pre.setString(1, username.getText().trim());
+            pre = conn.prepareStatement(query2);
             rs = pre.executeQuery();
             if (rs.next()) {
-                Alert alert = new Alert(AlertType.INFORMATION, "Information", "This username is already taken!");
+                Alert alert = new Alert(AlertType.INFORMATION, "Information", "You can't create an account without the administrator's permission");
                 username.clear();
-                return true;
+                email.clear();
+                password.clear();
+                confirmPassword.clear();
+                return false;
             }
         } catch (SQLException ex) {
             System.err.println(ex);
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (pre != null) pre.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pre != null) {
+                    pre.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (SQLException ex) {
                 System.err.println(ex);
             }
         }
-        return false;
+        return true;
     }
 
     @FXML
@@ -130,7 +144,7 @@ public class createAccountController implements Initializable {
         Connection conn = null;
         PreparedStatement pre = null;
         String query1 = "INSERT INTO User (Username,Email,Password,Usertype) VALUES (?,?,?,?)";
-        if (validateFields() && validateEmail() && validatePasswordLength() && !checkIfUsernameExists()) {
+        if (validateFields() && validateEmail() && validatePasswordLength() && checkIfAccountAlreadyExist()) {
             try {
                 conn = DatabaseConnection.Connect();
                 pre = conn.prepareStatement(query1);
@@ -138,9 +152,9 @@ public class createAccountController implements Initializable {
                     pre.setString(1, username.getText().trim());
                     pre.setString(2, email.getText().trim());
                     pre.setString(3, password.getText());
-                    pre.setString(4, "Student");
+                    pre.setString(4, "Administrator");
                     pre.executeUpdate();
-                    Notification notification = new Notification("Information", "Account successfully created! You can now log in.", 3);
+                    Notification notification = new Notification("Information", "Account successfully created", 3);
                     LoadStage stage = new LoadStage("/librarymanagementsystem/view/login.fxml", close);
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION, "Information", "Passwords do not match");
@@ -151,8 +165,12 @@ public class createAccountController implements Initializable {
                 System.err.println(ex);
             } finally {
                 try {
-                    if (pre != null) pre.close();
-                    if (conn != null) conn.close();
+                    if (pre != null) {
+                        pre.close();
+                    }
+                    if (conn != null) {
+                        conn.close();
+                    }
                 } catch (SQLException ex) {
                     System.err.println(ex);
                 }
@@ -161,7 +179,7 @@ public class createAccountController implements Initializable {
     }
 
     @FXML
-    private void cancel(ActionEvent event) throws IOException {
+    private void caancel(ActionEvent event) throws IOException {
         LoadStage stage = new LoadStage("/librarymanagementsystem/view/login.fxml", password);
     }
 
