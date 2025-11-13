@@ -309,7 +309,7 @@ public class trackLateFeeController implements Initializable {
                 details.add(new IssueDetails(resultSet1.getString(1), resultSet1.getString(2), resultSet1.getString(3), resultSet1.getString(4), resultSet1.getString(5), resultSet1.getString(6), resultSet1.getDouble(7), resultSet1.getString(8)));
             }
             tableView.setItems(details);
-            totalFee.setText(String.valueOf(totalFees) + ".00");
+            totalFee.setText(String.valueOf(totalFees));
         } catch (SQLException ex) {
             Logger.getLogger(trackLateFeeController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
