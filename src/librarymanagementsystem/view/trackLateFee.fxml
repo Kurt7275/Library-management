@@ -104,7 +104,7 @@
             <TableColumn fx:id="studentName" prefWidth="92.0" text="Student Name" />
             <TableColumn fx:id="issuedDate" prefWidth="92.0" text="Issued Date / Time" />
             <TableColumn fx:id="returnDate" prefWidth="92.0" text="Return Date / Time" />
-            <TableColumn fx:id="fee" prefWidth="92.0" text="Late Fee (MWK)" />
+            <TableColumn fx:id="fee" prefWidth="92.0" text="Late Fee (PHP)" />
             <TableColumn fx:id="issuedBy" prefWidth="92.0" text="Issued by" />
          </columns>
          <BorderPane.margin>
@@ -118,7 +118,7 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="70.0" prefWidth="1000.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Fee (MWK) :">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Fee (PHP) :">
                <font>
                   <Font size="15.0" />
                </font>
