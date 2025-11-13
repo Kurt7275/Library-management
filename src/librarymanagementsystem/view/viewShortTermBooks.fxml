@@ -17,7 +17,7 @@
             <TableColumn fx:id="issuedTimeCol" prefWidth="75.0" text="Issued Time" />
             <TableColumn fx:id="returnTimeCol" prefWidth="75.0" text="Return Time" />
             <TableColumn fx:id="hoursCol" prefWidth="75.0" text="Number of Hours" />
-            <TableColumn fx:id="feeCol" prefWidth="75.0" text="Late Fee (MWK)" />
+            <TableColumn fx:id="feeCol" prefWidth="75.0" text="Late Fee (PHP)" />
         </columns>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
