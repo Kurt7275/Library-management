@@ -261,17 +261,24 @@ public class studentsController implements Initializable {
     }
 
     private boolean validatePhoneNumber() {
-        Pattern p1 = Pattern.compile("[+]{1}265[8]{2}[0-9]{7}");
-        Pattern p2 = Pattern.compile("[+]{1}265[9]{2}[0-9]{7}");
-        Matcher m1 = p1.matcher(studentPhone.getText());
-        Matcher m2 = p2.matcher(studentPhone.getText());
-        if (m1.find() && m1.group().equals(studentPhone.getText()) || m2.find() && m2.group().equals(studentPhone.getText())) {
+        // Pattern for Philippine mobile numbers like 09628960301
+        Pattern p = Pattern.compile("^(09)[0-9]{9}$");
+
+        Matcher m = p.matcher(studentPhone.getText());
+
+        if (m.matches()) {
             return true;
         } else {
-            librarymanagementsystem.model.Alert alert = new librarymanagementsystem.model.Alert(Alert.AlertType.ERROR, "Phone number validation", "Please enter a valid phone number!");
+            librarymanagementsystem.model.Alert alert =
+                    new librarymanagementsystem.model.Alert(
+                            Alert.AlertType.ERROR,
+                            "Phone number validation",
+                            "Please enter a valid phone number! Format: 09XXXXXXXXX"
+                    );
             return false;
         }
     }
+
 
     private boolean checkIFIDExist() {
         PreparedStatement pre = null;
